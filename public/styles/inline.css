@@ -344,6 +344,13 @@ body {
   font-size: x-large;
 }
 
+.weather-card .show-distance {
+  background-color: transparent;
+  border: none;
+  float: left;
+  font-size: xx-large;
+}
+
 .weather-card .location {
   font-size: 1.75em;
 }

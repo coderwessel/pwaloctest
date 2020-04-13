@@ -40,7 +40,9 @@ function addLocation() {
   const selected = select.options[select.selectedIndex];
   const geo = selected.value;
   const label = selected.textContent;
-  const location = {label: label, geo: geo};
+  const description = document.getElementById('description').value;
+  const location = {label: label, geo: geo, description: description};
+  
   // Create a new card & get the weather data from the server
   const card = getForecastCard(location);
   getForecastFromNetwork(geo).then((forecast) => {
@@ -64,6 +66,59 @@ function removeLocation(evt) {
     saveLocationList(weatherApp.selectedLocations);
   }
 }
+
+var getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+    // navigator.geolocation.getCurrentPosition(success, error, options);
+  });
+}
+
+function calculateDistance(lon1, lat1, lon2, lat2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = (lat2-lat1).toRad();  // Javascript functions in radians
+  var dLon = (lon2-lon1).toRad(); 
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+/** Converts numeric degrees to radians */
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180;
+  }
+}
+
+
+function showDistance(evt) {
+  const parent = evt.srcElement.parentElement;
+  //console.log(parent);
+  
+  //get current position
+  getPosition()
+  .then((position) => {
+    //const distance = parent.id;
+    const target = {
+      longitude: 4.737142, 
+      latitude: 52.63622
+    }
+    var crd = position.coords;
+       
+    const distance = Math.round(1000*calculateDistance(crd.longitude,crd.latitude,target.longitude,target.latitude));
+    parent.querySelector('.current .temperature .value').textContent  = distance;
+  })
+  .catch((err) => {
+    parent.querySelector('.current .temperature .value').textContent  = err;
+  });
+  
+  //console.log(parent);
+  
+}
+
 
 /**
  * Renders the forecast data into the card element.
@@ -89,7 +144,7 @@ function renderForecast(card, data) {
   cardLastUpdatedElem.textContent = data.currently.time;
 
   // Render the forecast data into the card.
-  card.querySelector('.description').textContent = data.currently.summary;
+  //card.querySelector('.description').textContent = "huh:" + fname; //fname;//data.currently.summary;
   const forecastFrom = luxon.DateTime
       .fromSeconds(data.currently.time)
       .setZone(data.timezone)
@@ -195,9 +250,12 @@ function getForecastCard(location) {
   }
   const newCard = document.getElementById('weather-template').cloneNode(true);
   newCard.querySelector('.location').textContent = location.label;
+  newCard.querySelector('.description').textContent = location.description;
   newCard.setAttribute('id', id);
   newCard.querySelector('.remove-city')
       .addEventListener('click', removeLocation);
+  newCard.querySelector('.show-distance')
+      .addEventListener('click', showDistance);
   document.querySelector('main').appendChild(newCard);
   newCard.removeAttribute('hidden');
   return newCard;
@@ -251,7 +309,7 @@ function loadLocationList() {
   if (!locations || Object.keys(locations).length === 0) {
     const key = '40.7720232,-73.9732319';
     locations = {};
-    locations[key] = {label: 'New York City', geo: '40.7720232,-73.9732319'};
+    locations[key] = {label: 'New York City', geo: '40.7720232,-73.9732319', description: 'what a city'};
   }
   return locations;
 }

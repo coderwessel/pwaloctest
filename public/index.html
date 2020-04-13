@@ -70,6 +70,7 @@
         </svg>
       </div>
       <button class="remove-city">&times;</button>
+      <button class="show-distance">&#9784;</button>
       <div class="city-key" hidden></div>
       <div class="card-last-updated" hidden></div>
       <div class="location">&nbsp;</div>
@@ -79,7 +80,7 @@
         <div class="visual">
           <div class="icon"></div>
           <div class="temperature">
-            <span class="value"></span><span class="scale">°F</span>
+            <span class="value"></span><span class="scale">Meter</span>
           </div>
         </div>
         <div class="description">
@@ -197,6 +198,8 @@
           <option value="31.2243085,120.9162955">Shanghai, China</option>
           <option value="35.6735408,139.5703032">Tokyo, Japan</option>
         </select>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description">
       </div>
       <div class="dialog-buttons">
         <button id="butDialogCancel" class="button">Cancel</button>
