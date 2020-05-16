@@ -18,8 +18,8 @@
 'use strict';
 
 // CODELAB: Update cache names any time any of the cached files change.
-const CACHE_NAME = 'static-cache-v3';
-const DATA_CACHE_NAME = 'data-cache-v1';
+const CACHE_NAME = 'static-cache-v73';
+const DATA_CACHE_NAME = 'data-cache-v2';
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
@@ -28,7 +28,16 @@ const FILES_TO_CACHE = [
   '/scripts/app.js',
   '/scripts/install.js',
   '/scripts/luxon-1.11.4.js',
+  '/scripts/leaflet.js',
+  '/scripts/map.js',
+  '/scripts/images/marker-icon-2x.png',
   '/styles/inline.css',
+  '/styles/leaflet.css',
+  '/images/radar-far.svg',
+  '/images/radar-warm.svg',
+  '/images/radar-cold.svg',
+  '/images/radar-hot.svg',
+  '/images/radar-visited.svg',
   '/images/add.svg',
   '/images/clear-day.svg',
   '/images/clear-night.svg',

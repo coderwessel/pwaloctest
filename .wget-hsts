@@ -1,0 +1,5 @@
+# HSTS 1.0 Known Hosts database for GNU Wget.
+# Edit at your own risk.
+# <hostname>[:<port>]	<incl. subdomains>	<created>	<max-age>
+wetransfer.com	0	1	1588191608	15552000
+we.tl	0	1	1588191607	31536000

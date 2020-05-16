@@ -62,8 +62,8 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  font-size: 20px;
-  height: 56px;
+  font-size: 18px;
+  height: 50px;
   justify-content: flex-start;
   padding: 16px 16px 0 16px;
   position: fixed;
@@ -96,6 +96,19 @@ body {
 .header #butRefresh {
   background: url(/images/refresh.svg) center center no-repeat;
 }
+
+.header #butLock {
+  background: url(/images/lock.svg) center center no-repeat;
+}
+
+.header #butUnlock {
+  background: url(/images/unlock.svg) center center no-repeat;
+}
+
+.header #butShare {
+  background: url(/images/share.svg) center center no-repeat;
+}
+
 
 .header #butInstall {
   background: url(/images/install.svg) center center no-repeat;
@@ -169,6 +182,26 @@ body {
 
 .icon.add {
   background-image: url("/images/add.svg");
+}
+
+.radar-far {
+ background-image: url("/images/radar-far.svg");
+}
+
+.radar-cold {
+  background-image: url("/images/radar-cold.svg");
+}
+
+.radar-warm {
+  background-image: url("/images/radar-warm.svg");
+}
+
+.radar-hot {
+  background-image: url("/images/radar-hot.svg");
+}
+
+.icon.radar-visited {
+  background-image: url("/images/radar-visited.svg");
 }
 
 .icon.clear-day {
@@ -252,6 +285,38 @@ body {
   width: 100%;
 }
 
+/* 
+* dialogs
+*/
+
+/**
+ * Popup dialog
+ */
+
+#popUpDialogContainer, #shareDialogContainer {
+  background: rgba(0, 0, 0, 0.57);
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
+  width: 100%;
+  will-change: opacity;
+}
+
+#popUpDialogContainer.visible, #shareDialogContainer.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.pop-up-dialog-title {
+  font-size: 1.25em;
+  padding-top: 20px;
+}
+
 /**
  * Add dialog
  */
@@ -289,18 +354,19 @@ body {
 }
 
 .dialog > div {
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
+  
 }
 
 .dialog-title {
-  font-size: 1.25em;
-  padding-top: 20px;
+  font-size: 1em;
+  padding-top: 10px;
 }
 
 .dialog-body {
-  padding-bottom: 24px;
-  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
 }
 
 .dialog-body select {
@@ -308,9 +374,9 @@ body {
 }
 
 .dialog-buttons {
-  float: right;
+  float: left;
   padding-bottom: 16px;
-  padding-right: 17px !important;
+  padding-left: 37px !important;
 }
 
 .dialog .button {
@@ -318,6 +384,16 @@ body {
   border: none;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+/**
+ * map
+ */
+
+.location-picker {
+  height: 200px;
+  padding-right: 20px;
+  padding-leftt: 20px;
 }
 
 /**
@@ -345,10 +421,7 @@ body {
 }
 
 .weather-card .show-distance {
-  background-color: transparent;
-  border: none;
   float: left;
-  font-size: xx-large;
 }
 
 .weather-card .location {
